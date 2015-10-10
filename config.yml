@@ -1,0 +1,20 @@
+---
+#
+# Global configuration file
+#
+
+## LDAP directory configuration
+ldap_host: "ldap.test.local"
+ldap_port: 389
+ldap_ssl: "no"
+ldap_suffix: "dc=test,dc=local"
+
+## Customize user in charge of authenticating users
+ldap_bind_dn: "cn=manager,{{ ldap_suffix }}"
+ldap_bind_pw: "secret"
+
+## SASL Backend (allowed values : ldap, pam)
+sasl_backend: "ldap"
+
+## SASL search filter
+sasl_ldap_filter: "(|(mail=%U@%d)(&(uid=%U)(sn=Cyrus)))"
