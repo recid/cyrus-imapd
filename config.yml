@@ -19,5 +19,14 @@ sasl_backend: "ldap"
 ## SASL search filter
 sasl_ldap_filter: "(|(mail=%U@%d)(&(uid=%U)(sn=Cyrus)))"
 
+## SSL/TLS ##
+enable_legacy_ssl: "no"
+tls_cert_file: /etc/ssl/certs/mail.pem
+tls_key_file: /etc/ssl/certs/mail.key
+tls_ca_file: /etc/ssl/certs/ca.pem
+
+## POP ##
+enable_pop: "no"
+
 ## Upgrade ##
 enable_upgrade: "yes"

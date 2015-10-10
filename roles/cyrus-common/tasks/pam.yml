@@ -1,0 +1,11 @@
+---
+- name: Deploy pam configuration
+  template: src=pam dest=/etc/pam.d/{{ item }} backup=yes
+  with_items:
+   - imap
+   - sieve
+   - mupdate
+  when: sasl_backend == "pam"
+  notify:
+   - Restart saslauthd
+  tags: cyrus-backend

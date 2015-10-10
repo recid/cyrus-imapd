@@ -1,0 +1,15 @@
+---
+galaxy_info:
+  author: Cédric Liard
+  description: Quick and easy Cyrus-IMAP software installer
+  company:
+  licence: GPLv3
+  min_ansible_version: 1.7
+  platforms:
+  - name: Debian
+    versions:
+    - wheezy
+    - jessie
+  categories:
+    - system
+dependencies: []

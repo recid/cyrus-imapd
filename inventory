@@ -1,0 +1,23 @@
+#
+# Inventory file
+#
+
+[cyrusfullservers]
+back.example.local
+
+[cyrusmupdateservers]
+[cyrusbackservers]
+[cyrusfrontservers]
+
+# THE LAST PART IS REQUIRED
+# DO NOT EDIT AFTER THIS LINE
+
+[cyrusmurderservers:children]
+cyrusmupdateservers
+
+[cyrusfrontendservers:children]
+cyrusfrontservers
+
+[cyrusbackendservers:children]
+cyrusfullservers
+cyrusbackservers
