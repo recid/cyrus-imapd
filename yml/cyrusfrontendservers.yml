@@ -1,0 +1,6 @@
+---
+- hosts: cyrusfrontendservers
+  vars_files:
+    - config.yml
+  roles:
+    - cyrus-frontend

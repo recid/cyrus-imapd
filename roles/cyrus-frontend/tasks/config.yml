@@ -1,0 +1,58 @@
+---
+- name: Deploy cyrus.conf basic frontend configuration
+  copy: src={{ item }} dest=/etc/cyrus_conf.d/{{ item }} mode=0644
+  with_items:
+   - 01-IDLE_cyrus.conf
+   - 12-IMAP_cyrus.conf
+   - 14-SIEVE_cyrus.conf
+   - 15-LMTP_cyrus.conf
+   - 21-EVENTS_cyrus.conf
+  notify:
+    - Merge cyrus.conf configuration files
+    - Fix perms on Cyrus configuration files
+    - Restart Cyrus-Imapd service
+  tags: cyrus-frontend
+
+- name: Deploy cyrus.conf MUPDATE frontend configuration
+  copy: src={{ item }} dest=/etc/cyrus_conf.d/{{ item }} mode=0644
+  with_items:
+   - 11-MUPDATE_cyrus.conf
+  notify:
+    - Merge cyrus.conf configuration files
+    - Fix perms on Cyrus configuration files
+    - Restart Cyrus-Imapd service
+  when: mupdate_server == ""
+  tags: cyrus-frontend
+
+- name: Deploy cyrus.conf POP frontend configuration
+  copy: src={{ item }} dest=/etc/cyrus_conf.d/{{ item }} mode=0644
+  with_items:
+   - 13-POP_cyrus.conf
+  notify:
+    - Merge cyrus.conf configuration files
+    - Fix perms on Cyrus configuration files
+    - Restart Cyrus-Imapd service
+  when: enable_pop != "no"
+  tags: cyrus-frontend
+
+- name: Deploy cyrus.conf IMAPS frontend configuration
+  copy: src={{ item }} dest=/etc/cyrus_conf.d/{{ item }} mode=0644
+  with_items:
+   - 16-IMAPS_cyrus.conf
+  notify:
+    - Merge cyrus.conf configuration files
+    - Fix perms on Cyrus configuration files
+    - Restart Cyrus-Imapd service
+  when: enable_legacy_ssl != "no"
+  tags: cyrus-frontend
+
+- name: Deploy cyrus.conf POPS frontend configuration
+  copy: src={{ item }} dest=/etc/cyrus_conf.d/{{ item }} mode=0644
+  with_items:
+      - 17-POPS_cyrus.conf
+  notify:
+    - Merge cyrus.conf configuration files
+    - Fix perms on Cyrus configuration files
+    - Restart Cyrus-Imapd service
+  when: enable_pop != "no" and enable_legacy_ssl != "no"
+  tags: cyrus-frontend

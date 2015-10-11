@@ -1,0 +1,20 @@
+---
+- name: Deploy cyrus.conf MUPDATE murder configuration
+  copy: src={{ item }} dest=/etc/cyrus_conf.d/{{ item }} mode=0644
+  with_items:
+   - 11-MUPDATEMASTER_cyrus.conf
+  notify:
+    - Merge cyrus.conf configuration files
+    - Fix perms on Cyrus configuration files
+    - Restart Cyrus-Imapd service
+  tags: cyrus-murder
+
+- name: Add murder user as admin
+  lineinfile: >
+    dest=/etc/imapd.conf
+    regexp="^admins: cyrus"
+    line="admins: cyrus murder"
+  notify:
+    - Fix perms on Cyrus configuration files
+    - Restart Cyrus-Imapd service
+  tags: cyrus-murder

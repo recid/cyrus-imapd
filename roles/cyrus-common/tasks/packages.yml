@@ -11,5 +11,13 @@
   with_items:
    - cyrus-imapd-2.4
    - cyrus-admin-2.4
+   - cyrus-clients
   when: ansible_pkg_mgr == "apt"
+  tags: cyrus-common
+
+- name: APT Install Cyrus-Murder Package
+  apt: name={{ item }} state=present
+  with_items:
+   - cyrus-murder
+  when: ansible_pkg_mgr == "apt" and mupdate_server is defined
   tags: cyrus-common

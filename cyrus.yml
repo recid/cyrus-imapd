@@ -1,3 +1,5 @@
 ---
 # Please don't edit this file
 - include: yml/cyrusbackendservers.yml
+- include: yml/cyrusfrontendservers.yml
+- include: yml/cyrusmurderservers.yml

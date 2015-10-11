@@ -2,9 +2,8 @@
 - name: Add missing mupdate service in /etc/services
   lineinfile: >
       dest=/etc/services
-      regexp="^mupdate.*3509.*"
       insertafter="^svn.*3690.*"
-      line="mupdate         3509/tcp                        # Cyrus imap synchronization service"
+      line="mupdate         3905/tcp                        # Cyrus imap synchronization service"
   notify:
     - Restart Cyrus-Imapd service
   tags: cyrus-common
@@ -12,8 +11,7 @@
 - name: Add missing sieve service in /etc/services
   lineinfile: >
       dest=/etc/services
-      regexp="^sieve.*4190.*"
-      insertafter="^sysrqd.*4094.*"
+      insertafter="^sieve.*4190.*"
       line="sieve           4190/tcp                        # Cyrus imap mail filtering service"
   notify:
     - Restart Cyrus-Imapd service
@@ -22,8 +20,7 @@
 - name: Add missing lmtp service in /etc/services
   lineinfile: >
       dest=/etc/services
-      regexp="^lmtp.*24.*"
-      insertafter="^telnet.*23.*"
+      insertafter="^lmtp.*24.*"
       line="lmtp            24/tcp                          # Cyrus imap mail filtering service"
   notify:
     - Restart Cyrus-Imapd service
