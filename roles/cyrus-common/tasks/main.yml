@@ -1,5 +1,6 @@
 ---
 - include: include_vars.yml
+- include: hosts.yml
 - include: packages.yml
 - include: services.yml
   when: ansible_distribution == "Debian"

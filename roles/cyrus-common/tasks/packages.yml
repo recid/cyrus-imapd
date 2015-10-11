@@ -3,7 +3,6 @@
   yum: pkg={{ item }} state=present
   with_items:
    - cyrus-imapd
-   - cyrus-admin
   when: ansible_pkg_mgr == "yum"
   tags: cyrus-common
 
