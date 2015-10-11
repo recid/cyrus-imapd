@@ -3,11 +3,15 @@
 #
 
 [cyrusfullservers]
-back.example.local
 
 [cyrusmupdateservers]
+murder.test.local
+
 [cyrusbackservers]
+back.test.local
+
 [cyrusfrontservers]
+front.test.local
 
 # THE LAST PART IS REQUIRED
 # DO NOT EDIT AFTER THIS LINE
