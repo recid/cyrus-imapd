@@ -3,51 +3,56 @@
 # Global configuration file
 #
 
-## LDAP directory configuration
+#
+# Prerequiste System #
+#
+## EPEL URLs
+epel_repo_url: "http://download.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm"
+epel_repo_gpg_key_url: "/etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-{{ ansible_distribution_major_version }}"
+# Upgrade ##
+enable_upgrade: "yes"
+
+#
+# LDAP directory configuration #
+#
+# Here, you can indicate the LDAP directory use to authenticate users
 ldap_host: "ldap.test.local"
 ldap_port: 389
 ldap_ssl: "no"
 ldap_suffix: "dc=test,dc=local"
-
-## Customize user in charge of authenticating users
 ldap_bind_dn: "cn=manager,{{ ldap_suffix }}"
 ldap_bind_pw: "secret"
 
+#
+# SASL configuration #
+#
 ## SASL Backend (allowed values : ldap, pam)
 sasl_backend: "ldap"
-
-## SASL search filter
+# SASL search filter
 sasl_ldap_filter: "(|(mail=%U@%d)(&(uid=%U)(sn=Cyrus)))"
 
-## SSL/TLS ##
+#
+# Cyrus Configuration #
+#
+## TLS 
 enable_legacy_ssl: "no"
 tls_cert_file: /etc/ssl/certs/mail.pem
 tls_key_file: /etc/ssl/certs/mail.key
 tls_ca_file: /etc/ssl/certs/ca.pem
-
-## POP ##
+# POP
 enable_pop: "no"
-
-## Upgrade ##
-enable_upgrade: "yes"
-
-# EPEL URLs
-epel_repo_url: "http://download.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm"
-epel_repo_gpg_key_url: "/etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-{{ ansible_distribution_major_version }}"
-
-#### IMAP Cluster Configuration ####
-## Clustering is automatically enabled if you set a cyrusmupdateserver
-## in your inventory.
-## You need to set a user for cluster synchronisation. murder will by
-## used by default.
-## Be carefull : caracters ', " and ; will be automatically removed.
+## IMAP Cluster Configuration
+# Clustering is automatically enabled if you set a cyrusmupdateserver in your inventory.
+# You need to set a user for cluster synchronisation. murder will by used by default.
+# Be carefull : caracters ', " and ; will be automatically removed.
 mupdate_server: murder.test.local
 mupdate_user: murder
 mupdate_pass: murder
 
-### Local DNS ###
-## If you don't have the DNS record yet, the /etc/hosts is
-## updated with the hosts defined in this file
+#
+# Local DNS #
+#
+# If you don't have the DNS record yet, each /etc/hosts is updated with the hosts defined in this file
 update_host: "yes"
 ldap_record: "192.168.1.1	ldap.test.local"
 back_record: "192.168.1.2	back.test.local"
